@@ -29,19 +29,19 @@ form.addEventListener("submit", (ev) => {
                 ev.preventDefault()
                 page += 1;
                 getImages(search, page)
-                    .then((images) => {return markup(images)})
+                    .then((images) => { return markup(images) })
             })
             page = 1;
             return markup(images);
         })
-        .catch((error) => { 
-                iziToast.show({
+        .catch((error) => {
+            iziToast.show({
                 message: 'Error happened',
                 messageColor: "#fff",
                 backgroundColor: "#EF4040",
                 position: "topRight",
-                });
+            });
             return;
-         })
-        .finally(() => {hideLoader()})
+        })
+        .finally(() => { hideLoader() });
 });
