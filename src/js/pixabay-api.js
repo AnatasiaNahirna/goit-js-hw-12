@@ -1,7 +1,6 @@
 import axios from "axios";
 import iziToast from "izitoast";
 import "izitoast/dist/css/iziToast.min.css";
-import { hideLoadMoreButton } from "./render-functions";
 
 export default async function getImagesByQuery(query, page = 1) {
   try {
