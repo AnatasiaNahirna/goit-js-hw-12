@@ -43,5 +43,5 @@ form.addEventListener("submit", (ev) => {
             });
             return;
         })
-        .finally(() => { hideLoader() });
+        .finally(() => { hideLoader() })
 });
