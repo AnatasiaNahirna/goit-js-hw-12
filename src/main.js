@@ -5,10 +5,11 @@ import {createGallery as markup, clearGallery, showLoader, hideLoader, showLoadM
 
 const form = document.querySelector(".form");
 
+let search;
 form.addEventListener("submit", (ev) => {
     ev.preventDefault()
     hideLoadMoreButton()
-    const search = ev.currentTarget.elements['search-text'].value.trim()
+    search = ev.currentTarget.elements['search-text'].value.trim()
     if (!search) {
         iziToast.show({
             message: 'Please fill in the field',
@@ -24,14 +25,26 @@ form.addEventListener("submit", (ev) => {
     getImages(search)
         .then((images) => {
             let page = 1;
-            if (images.length !== 0) { showLoadMoreButton() };
+            if (images.length >= 15) { showLoadMoreButton() };
             document.querySelector(".load-more").addEventListener("click", (ev) => {
                 ev.preventDefault()
+                showLoader()
                 page += 1;
                 getImages(search, page)
-                    .then((images) => { return markup(images) })
+                    .then((images) => {
+                        hideLoader()
+                        markup(images)
+                        const liSize = document.querySelector(".img-li").getBoundingClientRect().height * 2;
+                        window.scrollBy({
+                            top: liSize,
+                            behavior: "smooth",
+                        });
+                        return;
+                    })
+
             })
             page = 1;
+
             return markup(images);
         })
         .catch((error) => {
