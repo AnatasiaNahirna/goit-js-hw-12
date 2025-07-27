@@ -1,18 +1,158 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-/* Common styles */
-@import url('./reset.css');
-@import url('./base.css');
-@import url('./container.css');
-@import url('./animations.css');
+body {
+  font-family: "Montserrat", sans-serif;
+  margin: 36px auto;
+}
 
-/* Sections style */
-@import url('./header.css');
-@import url('./vite-promo.css');
-@import url('./badges.css');
-@import url('./back-link.css');
-@import url('./footer.css');
+img {
+  display: block;
+}
+
+a {
+  text-decoration: none;
+}
+
+ul,
+ol {
+  list-style: none;
+  padding-left: 0;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  border: 0;
+  padding: 0;
+
+  white-space: nowrap;
+  clip-path: inset(100%);
+  clip: rect(0 0 0 0);
+  overflow: hidden;
+}
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input {
+  box-sizing: border-box;
+  border: 1px solid #808080;
+  border-radius: 4px;
+  width: 272px;
+  height: 40px;
+  padding: 8px 16px;
+}
+
+.input::placeholder {
+  color: #808080
+}
+
+.input:hover {
+  border-color: #000;
+}
+
+.input:focus {
+  border-color: #4e75ff;
+}
+
+.button {
+  border: none;
+  border-radius: 8px;
+  width: 75px;
+  height: 40px;
+  color: #fff;
+  background-color: #4e75ff;
+}
+
+.button:hover {
+  background-color: #6C8CFF;
+}
+
+.load-more {
+  width: 125px;
+}
+
+.gallery {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+
+.img-li {
+  border: 1px solid #808080;
+}
+
+.img {
+  width: 360px;
+  height: 200px;
+  object-fit: cover;
+}
+
+.all-stats {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+}
+
+.stats-name {
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 1.33;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.stats-value {
+  text-align: center;
+  font-size: 12px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+.loader {
+  width: 64px;
+  height: 48px;
+  position: relative;
+  animation: split 1s ease-in infinite alternate;
+}
+
+.loader::before,
+.loader::after {
+  content: '';
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
+  left: 0;
+  top: 0;
+  transform: translateX(-10px);
+  background: #FF3D00;
+  opacity: 0.75;
+  backdrop-filter: blur(20px);
+}
+
+.loader::after {
+  left: auto;
+  right: 0;
+  background: #ffddd2;
+  transform: translateX(10px);
+}
+
+@keyframes split {
+
+  0%,
+  25% {
+    width: 64px
+  }
+
+  100% {
+    width: 148px
+  }
+}
