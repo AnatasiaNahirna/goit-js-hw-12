@@ -14,15 +14,14 @@ async function onLoadMoreclick(ev) {
     page += 1;
     try {
         const imagesGet = await getImages(search, page)
-            hideLoader()
-            markup(imagesGet)
+            markup(imagesGet.hits)
             const liSize = document.querySelector(".img-li").getBoundingClientRect().height * 2;
             window.scrollBy({
                 top: liSize,
                 behavior: "smooth",
             });
 
-            if (imagesGet.length < 15) {
+            if (imagesGet.hits.length < 15 || page * 15 === imagesGet.totalHits) {
                 hideLoadMoreButton();
                 iziToast.show({
                     message: "We're sorry, but you've reached the end of search results.",
@@ -40,7 +39,7 @@ async function onLoadMoreclick(ev) {
             position: 'topRight',
         });
         return;
-    }
+    } finally {hideLoader()}
 }
 
 form.addEventListener("submit", async (ev) => {
@@ -59,11 +58,11 @@ form.addEventListener("submit", async (ev) => {
 
     showLoader();
     clearGallery();
+    page = 1;
     try {
         const imagesGet = await getImages(search)
-        if (imagesGet.length >= 15) { showLoadMoreButton() };
-        page = 1;
-        return markup(imagesGet);
+        if (imagesGet.totalHits > 15) { showLoadMoreButton() };
+        return markup(imagesGet.hits);
     } catch (error) {
         iziToast.show({
             message: 'Error happened',

@@ -23,10 +23,13 @@ export default async function getImagesByQuery(query, page = 1) {
         backgroundColor: "#EF4040",
         position: "topRight",
       });
-      return response.data.hits;
+
     }
     
-    return response.data.hits;
+    return {
+        hits: response.data.hits,
+        totalHits: response.data.totalHits
+    };
   } catch (error) {
     throw error;
   }
